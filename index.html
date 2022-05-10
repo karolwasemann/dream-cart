@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Koszyk marzeń</title>
+    <link
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+    />
+  </head>
+  <body class="bg-gray-900 p-12 flex justify-center items-top">
+    <div class="bg-white rounded-md shadow-md p-5">
+      <h1 class="text-2xl font-bold border-b pb-2">Podsumowanie zamówienia</h1>
+
+      <div class="flex flex-col">
+        <div class="flex items-center border-b border-dashed">
+          <div class="flex-auto">
+            <img
+              class="w-10 rounded-sm overflow-hidden"
+              src="https://i.picsum.photos/id/160/200/150.jpg"
+              alt=""
+            />
+          </div>
+
+          <div class="flex-auto px-5 py-3">
+            <h2>Kurs "Opanuj JavaScript"</h2>
+            <p class="text-xs">Kurs programowania</p>
+          </div>
+
+          <div class="flex justify-end">
+            <div class="border text-center mx-3">
+              <input class="w-10" type="number" value="1" />
+            </div>
+            <div class="price">399 zł</div>
+            <div class="pl-4"><i class="fas fa-times"></i></div>
+          </div>
+        </div>
+
+        <div class="flex items-center border-b border-dashed">
+          <div class="flex-auto">
+            <img
+              class="w-10 rounded-sm overflow-hidden"
+              src="https://i.picsum.photos/id/450/200/150.jpg"
+              alt=""
+            />
+          </div>
+
+          <div class="flex-auto px-5 py-3">
+            <h2>Mentoring z Przemkiem</h2>
+            <p class="text-xs">Indywidualne konsultacje</p>
+          </div>
+
+          <div class="flex justify-end">
+            <div class="border text-center mx-3">
+              <input class="w-10" type="number" value="1" />
+            </div>
+            <div class="price">150 zł</div>
+            <div class="pl-4"><i class="fas fa-times"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="py-3 flex justify-end items-center">
+        <div class="pr-4">
+          Podsumowanie: <span class="font-bold summary">549 </span>zł
+        </div>
+        <div>
+          <button
+            class="
+              bg-blue-500
+              hover:bg-blue-700
+              text-white
+              font-bold
+              py-2
+              px-4
+              rounded
+            "
+          >
+            Wchodzę w to!
+          </button>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/js/all.min.js"></script>
+  </body>
+</html>
