@@ -63,5 +63,6 @@ const updatePrices = (index) => {
     return acc;
   }, 0);
 };
+console.log('a');
 
 getCartFromLocalStorage();
