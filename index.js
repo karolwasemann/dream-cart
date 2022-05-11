@@ -1,68 +1,53 @@
 // Import stylesheets
 import './style.css';
-const inputs = document.querySelectorAll('input');
 
-let products = [
-  {
-    name: 'Kurs Opanuj JS',
-    price: 399,
-    inCart: 1,
-    id: 0,
-  },
-  {
-    name: 'Mentoring z Przemkiem',
-    price: 150,
-    inCart: 1,
+const productsInCart = Array.from(document.querySelectorAll('.product'));
 
-    id: 1,
-  },
-];
-const pricesArray = document.querySelectorAll('.price');
+let costs = {};
 
-// pobierze dane z localStorage
-const getCartFromLocalStorage = () => {
-  products = JSON.parse(localStorage.getItem('cart')) || products;
+const updateCost = ({ value }, productPrice) => parseInt(value * productPrice);
 
-  console.log(products);
-  inputs.forEach((input, i) => {
-    input.value = products[i].inCart;
-    updatePrices(i);
+const calcSummaryPrice = () => {
+  const summaryValue = document.querySelector('.summary');
+
+  let costsValue = Object.values(costs);
+
+  costsValue = costsValue.reduce((total, curr) => {
+    total += curr;
+    return total;
+  });
+
+  summaryValue.textContent = costsValue;
+};
+
+const calcValues = (productsInCart) => {
+  productsInCart.forEach((product, index) => {
+    const currentProduct = product;
+    const amount = currentProduct.querySelector('input');
+    const costField = amount.parentNode.nextElementSibling.firstChild;
+    const costOfProduct = parseInt(costField.textContent);
+    const removeBtn = costField.parentNode.nextElementSibling;
+
+    costs[index] = updateCost(amount, costOfProduct);
+    calcSummaryPrice();
+
+    amount.addEventListener('input', () => {
+      if (amount.value < 0) {
+        amount.value = 0;
+      }
+      const currentValue = updateCost(amount, costOfProduct);
+      costs[index] = currentValue;
+      costField.textContent = `${currentValue} zł`;
+      calcSummaryPrice();
+    });
+
+    removeBtn.addEventListener('click', () => {
+      costs[index] = 0;
+      console.log(costs);
+      calcSummaryPrice();
+      currentProduct.remove();
+    });
   });
 };
 
-inputs.forEach((input, i) => {
-  input.addEventListener('change', (event) => {
-    if (event.target.value <= 0) {
-      event.target.value = 0;
-    }
-    updateCart(event, i);
-    updatePrices(i);
-  });
-});
-
-const updateCart = (e, i) => {
-  products.forEach((product) => {
-    if (product.id === i) {
-      product.inCart = parseInt(e.target.value);
-    }
-  });
-  localStorage.setItem('cart', JSON.stringify([...products]));
-};
-const updatePrices = (index) => {
-  // Update Products price
-
-  const callcedPreis = products[index].price * products[index].inCart;
-  pricesArray[index].textContent = `${callcedPreis} zł`;
-
-  // Update Summary price
-
-  const summary = document.querySelector('.summary');
-
-  summary.textContent = products.reduce((acc, curr) => {
-    acc += curr.price * curr.inCart;
-    return acc;
-  }, 0);
-};
-console.log('a');
-
-getCartFromLocalStorage();
+calcValues(productsInCart);
